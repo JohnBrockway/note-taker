@@ -1,0 +1,16 @@
+{
+  "name": "note-taker",
+  "version": "1.0.0",
+  "description": "Automatically link keywords in a notes app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "John Brockway",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^12.0.2"
+  }
+}
