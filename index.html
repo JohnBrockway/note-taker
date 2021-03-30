@@ -8,15 +8,14 @@
 </head>
 <body>
     <div id="flexbox">
-        <div id="sidebar" class="open"></div>
+        <div id="sidebar" class="open">
+            <ul id="itemsList"></ul>
+            <ul id="sessionsList"></ul>
+        </div>
         <div id="handle" onclick="operateSidebar()">&lsaquo;</div>
         <div id="main" class="sidebarOpen">
-            <h1>Hello World!</h1>
-            <p>
-                We are using Node.js <span id="node-version"></span>,
-                Chromium <span id="chrome-version"></span>,
-                and Electron <span id="electron-version"></span>.
-            </p>
+            <h1 id="itemTitle"></h1>
+            <ul id="notesList"></ul>
         </div>
     </div>
 
