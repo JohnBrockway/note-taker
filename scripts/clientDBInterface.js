@@ -14,7 +14,7 @@ function setUpItemsList(items) {
         if (itemA.Name < itemB.Name) {
             return -1;
         } else if (itemB.Name > itemA.Name) {
-            return 1
+            return 1;
         } else {
             return 0;
         }

@@ -1,0 +1,17 @@
+#main {
+    background-color: #0D1B2A;
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    color: #E0E1DD;
+    padding: 16px;
+}
+
+#main #itemTitle {
+    margin: 0;
+}
+
+#main #notesList {
+    list-style-type: none;
+    padding: 0;
+}
