@@ -25,6 +25,7 @@
     cursor: pointer;
     padding: 3px 10px;
     transition: background-color 0.1s;
+    font-size: 15px;
 }
 
 #sidebar ul li:hover {

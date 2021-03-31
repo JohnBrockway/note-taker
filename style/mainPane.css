@@ -9,6 +9,7 @@
 
 #main #itemTitle {
     margin: 0;
+    font-size: 28px;
 }
 
 #main #notesList {
@@ -28,8 +29,9 @@
 
 #main #notesList li .noteRow p {
     display: inline;
-    padding: 3px 0px;
+    padding: 4px 0px;
     margin: 0;
+    font-size: 14px;
 }
 
 #main #notesList li .noteRow .noteBullet {
