@@ -26,7 +26,7 @@ function setUpItemsList(items) {
         const listItemElement = document.createElement("li");
         let onclickText = onclickResultTemplate.replace("{0}", items[i].Name);
         onclickText = onclickText.replace("{1}", items[i].ID);
-        listItemElement.setAttribute("onclick", onclickText);  
+        listItemElement.setAttribute("onclick", onclickText);
         listItemElement.innerText = items[i].Name;
         itemsListElement.appendChild(listItemElement);
     }
@@ -65,7 +65,16 @@ function populateItem(notes) {
     const notesListElement = document.getElementById("notesList");
     for (let i = 0 ; i < notes.length ; i++) {
         const listItemElement = document.createElement("li");
-        listItemElement.innerText = notes[i].Text;
+        const divElement = document.createElement("div");
+        divElement.classList.add("noteRow");        
+        const bulletElement = document.createElement("p");
+        bulletElement.innerText = "▸";
+        bulletElement.classList.add("noteBullet");
+        const textElement = document.createElement("p"); 
+        textElement.innerText = notes[i].Text;
+        divElement.appendChild(bulletElement);
+        divElement.appendChild(textElement);
+        listItemElement.appendChild(divElement);
         notesListElement.appendChild(listItemElement);
     }
 }

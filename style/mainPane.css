@@ -15,3 +15,23 @@
     list-style-type: none;
     padding: 0;
 }
+
+#main #notesList li {
+    list-style-type: none;
+    padding: 0;
+}
+
+#main #notesList li .noteRow {
+    display: flex;
+    align-items: flex-start;
+}
+
+#main #notesList li .noteRow p {
+    display: inline;
+    padding: 3px 0px;
+    margin: 0;
+}
+
+#main #notesList li .noteRow .noteBullet {
+    margin-right: 8px;
+}
