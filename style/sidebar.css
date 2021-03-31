@@ -21,14 +21,26 @@
     padding: 0;
 }
 
+#sidebar #categoryList .categoryRow {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#sidebar #categoryList .categoryRow:hover {
+    background-color: #415A77;
+}
+
+#sidebar #categoryList .categoryRow p {
+    display: inline;
+    padding: 4px 10px;
+    margin: 0;
+}
+
 #sidebar #categoryList .categoryName {
     padding: 4px 10px;
     margin: 0;
-    cursor: pointer;
-}
-
-#sidebar #categoryList .categoryName:hover {
-    background-color: #415A77;
 }
 
 #sidebar .itemList {

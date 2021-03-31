@@ -38,21 +38,31 @@ function createItemElement(item) {
 
 /*
  * <li>
- *   <p class="categoryName" onclick="operateCategory(this)">{category.Name}</p>
+ *   <div class="categoryRow" onclick="operateCategory(this)">
+ *     <p class="categoryName>{category.Name}</p>
+ *     <p class="categoryIcon">▾</p>
+ *   </div>
  *   <ul class="itemList open" categoryid="{category.ID}"></ul>
  * <li>
  */
 function createCategoryElement(category) {
     const categoryElement = document.createElement("li");
+    const divElement = document.createElement("div");
+    divElement.classList.add("categoryRow");
     const categoryNameElement = document.createElement("p");
     categoryNameElement.innerText = category.Name;
     categoryNameElement.classList.add("categoryName");
-    categoryNameElement.setAttribute("onclick", "operateCategory(this)");
+    const categoryIconElement = document.createElement("p");
+    categoryIconElement.classList.add("categoryIcon");
+    categoryIconElement.innerText = "▾";
     const itemListElement = document.createElement("ul");
     itemListElement.classList.add("itemList");
     itemListElement.classList.add("open");
     itemListElement.setAttribute("categoryID", category.ID);
-    categoryElement.appendChild(categoryNameElement);
+    divElement.appendChild(categoryNameElement);
+    divElement.appendChild(categoryIconElement);
+    divElement.setAttribute("onclick", "operateCategory(this)");
+    categoryElement.appendChild(divElement);
     categoryElement.appendChild(itemListElement);
     return categoryElement;
 }
