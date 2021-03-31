@@ -6,17 +6,20 @@
  *   </div>
  * <li>
  */
-function createNoteElement(note) {
-    const listItemElement = document.createElement("li");
-    const divElement = document.createElement("div");
-    divElement.classList.add("noteRow");        
+function createNoteElement(note) {       
     const bulletElement = document.createElement("p");
     bulletElement.innerText = "▸";
     bulletElement.classList.add("noteBullet");
+    
     const textElement = document.createElement("p"); 
     textElement.innerText = note.Text;
+    
+    const divElement = document.createElement("div");
+    divElement.classList.add("noteRow"); 
     divElement.appendChild(bulletElement);
     divElement.appendChild(textElement);
+    
+    const listItemElement = document.createElement("li");
     listItemElement.appendChild(divElement);
     return listItemElement;
 }
@@ -28,9 +31,10 @@ function createNoteElement(note) {
  */
 function createItemElement(item) {
     const onclickResultTemplate = "loadItem(\"{0}\", {1})";
-    const itemElement = document.createElement("li");
     let onclickText = onclickResultTemplate.replace("{0}", item.Name);
     onclickText = onclickText.replace("{1}", item.ID);
+
+    const itemElement = document.createElement("li");
     itemElement.setAttribute("onclick", onclickText);
     itemElement.innerText = item.Name;
     return itemElement;
@@ -46,22 +50,26 @@ function createItemElement(item) {
  * <li>
  */
 function createCategoryElement(category) {
-    const categoryElement = document.createElement("li");
-    const divElement = document.createElement("div");
-    divElement.classList.add("categoryRow");
     const categoryNameElement = document.createElement("p");
     categoryNameElement.innerText = category.Name;
     categoryNameElement.classList.add("categoryName");
+
     const categoryIconElement = document.createElement("p");
     categoryIconElement.classList.add("categoryIcon");
     categoryIconElement.innerText = "▾";
+    
+    const divElement = document.createElement("div");
+    divElement.classList.add("categoryRow");
+    divElement.appendChild(categoryNameElement);
+    divElement.appendChild(categoryIconElement);
+    divElement.setAttribute("onclick", "operateCategory(this)");
+
     const itemListElement = document.createElement("ul");
     itemListElement.classList.add("itemList");
     itemListElement.classList.add("open");
     itemListElement.setAttribute("categoryID", category.ID);
-    divElement.appendChild(categoryNameElement);
-    divElement.appendChild(categoryIconElement);
-    divElement.setAttribute("onclick", "operateCategory(this)");
+
+    const categoryElement = document.createElement("li");
     categoryElement.appendChild(divElement);
     categoryElement.appendChild(itemListElement);
     return categoryElement;
