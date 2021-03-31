@@ -1,19 +1,51 @@
-window.electron.getItemsForWorldResponse(
+window.electron.getItemsForCategoryResponse(
     function(event, data) {
-        const items = JSON.parse(data);
-        setUpItemsList(items);
-        setUpSessionsList(items);
+        setUpItemsList(JSON.parse(data));
     });
-window.electron.getItemsForWorld(1);
+window.electron.getCategoriesForWorldResponse(
+    function(event, data) {
+        setUpCategories(JSON.parse(data));
+    });
+window.electron.getCategoriesForWorld(1);
 
 window.electron.getNotesForItemResponse((event, data) => populateItem(JSON.parse(data)));
 
+function setUpCategories(categories) {
+    categories.sort(function(categoryA, categoryB) {
+        if (categoryA.Name < categoryB.Name) {
+            return -1;
+        } else if (categoryA.Name > categoryB.Name) {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+
+    const onclickText = "operateCategory(this)";
+    const categoryListElement = document.getElementById("categoryList");
+    for (let i = 0 ; i < categories.length ; i++) {
+        const categoryElement = document.createElement("li");
+        const categoryNameElement = document.createElement("p");
+        categoryNameElement.innerText = categories[i].Name;
+        categoryNameElement.classList.add("categoryName");
+        categoryNameElement.setAttribute("onclick", onclickText);
+        const itemListElement = document.createElement("ul");
+        itemListElement.classList.add("itemList");
+        itemListElement.classList.add("open");
+        itemListElement.setAttribute("categoryID", categories[i].ID);
+        categoryElement.appendChild(categoryNameElement);
+        categoryElement.appendChild(itemListElement);
+        categoryListElement.appendChild(categoryElement);
+        window.electron.getItemsForCategory(categories[i].ID);
+    }
+}
+
 function setUpItemsList(items) {
-    items = items.filter(item => item.Alias == -1 && !item.IsSession);
+    items = items.filter(item => item.Alias == -1);
     items.sort(function(itemA, itemB) {
         if (itemA.Name < itemB.Name) {
             return -1;
-        } else if (itemB.Name > itemA.Name) {
+        } else if (itemA.Name > itemB.Name) {
             return 1;
         } else {
             return 0;
@@ -21,7 +53,7 @@ function setUpItemsList(items) {
     });
     
     const onclickResultTemplate = "loadItem(\"{0}\", {1})";
-    const itemsListElement = document.getElementById("itemsList");
+    const itemsListElement = Array.from(document.getElementsByClassName("itemList")).filter((item => item.getAttribute("categoryID") == items[0].Category))[0];
     for (let i = 0 ; i < items.length ; i++) {
         const listItemElement = document.createElement("li");
         let onclickText = onclickResultTemplate.replace("{0}", items[i].Name);
@@ -34,29 +66,9 @@ function setUpItemsList(items) {
     loadItem(items[0].Name, items[0].ID);
 }
 
-function setUpSessionsList(sessions) {
-    sessions = sessions.filter(session => session.IsSession);
-    sessions.sort((sessionA, sessionB) => sessionA.SessionOrder - sessionB.sessionOrder);
-
-    const onclickResultTemplate = "loadItem(\"{0}\", {1})";
-    const sessionsListElement = document.getElementById("sessionsList");
-    for (let i = 0 ; i < sessions.length ; i++) {
-        const listItemElement = document.createElement("li");
-        let onclickText = onclickResultTemplate.replace("{0}", sessions[i].Name);
-        onclickText = onclickText.replace("{1}", sessions[i].ID);
-        listItemElement.setAttribute("onclick", onclickText); 
-        listItemElement.innerText = sessions[i].Name;
-        sessionsListElement.appendChild(listItemElement);
-    }
-}
-
 function loadItem(itemName, itemID) {
     const notesList = document.getElementById("notesList");
-    let child = notesList.firstElementChild;
-    while (child != null) {
-        notesList.removeChild(child);
-        child = notesList.firstElementChild;
-    }
+    notesList.innerHTML = null;
     document.getElementById("itemTitle").innerText = itemName;
     window.electron.getNotesForItem(itemID);
 }

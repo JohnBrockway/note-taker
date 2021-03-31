@@ -21,7 +21,8 @@ function createWindow() {
 function maybeSetUpDatabase() {
     // TODO send 'ready' ping when these are all set up, block app function until ping
     db.run('CREATE TABLE IF NOT EXISTS Worlds (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT)');
-    db.run('CREATE TABLE IF NOT EXISTS Items (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Alias INTEGER, World INTEGER, IsSession INTEGER, SessionOrder INTEGER)');
+    db.run('CREATE TABLE IF NOT EXISTS Categories (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, World INTEGER)');
+    db.run('CREATE TABLE IF NOT EXISTS Items (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Alias INTEGER, Category INTEGER)');
     db.run('CREATE TABLE IF NOT EXISTS Notes (ID INTEGER PRIMARY KEY AUTOINCREMENT, Text TEXT, RelatedItems TEXT)');
 }
 
@@ -47,10 +48,17 @@ ipcMain.on('db-get-notes-for-item', (event, itemId) => {
     });
 });
 
-ipcMain.on('db-get-items-for-world', (event, worldId) => {
-    const stmt = db.prepare('SELECT * FROM Items WHERE World=?');
+ipcMain.on('db-get-items-for-category', (event, categoryId) => {
+    const stmt = db.prepare('SELECT * FROM Items WHERE Category=?');
+    stmt.all([categoryId], function(err, rows) {
+        event.sender.send('db-get-items-for-category-response', JSON.stringify(rows));
+    });
+});
+
+ipcMain.on('db-get-categories-for-world', (event, worldId) => {
+    const stmt = db.prepare('SELECT * FROM Categories WHERE World=?');
     stmt.all([worldId], function(err, rows) {
-        event.sender.send('db-get-items-for-world-response', JSON.stringify(rows));
+        event.sender.send('db-get-categories-for-world-response', JSON.stringify(rows));
     });
 });
 
@@ -66,13 +74,13 @@ ipcMain.on('db-add-note', (event, note) => {
 });
 
 ipcMain.on('db-add-item', (event, item) => { 
-    const stmt = db.prepare('INSERT INTO Items (Name, Alias, World, IsSession) VALUES (?,?,?,?)');
-    stmt.run([item.name, item.alias, item.world, 0]);
+    const stmt = db.prepare('INSERT INTO Items (Name, Alias, Category) VALUES (?,?,?)');
+    stmt.run([item.name, item.alias, item.category]);
 });
 
-ipcMain.on('db-add-session', (event, session) => { 
-    const stmt = db.prepare('INSERT INTO Items (Name, Alias, World, IsSession, SessionOrder) VALUES (?,?,?,?,?)');
-    stmt.run([session.name, session.alias, session.world, 1, session.sessionOrder]);
+ipcMain.on('db-add-category', (event, category) => { 
+    const stmt = db.prepare('INSERT INTO Categories (Name, World) VALUES (?,?)');
+    stmt.run([category.name, category.world]);
 });
 
 ipcMain.on('db-add-world', (event, world) => { 
@@ -86,13 +94,13 @@ ipcMain.on('db-update-note', (event, note) => {
 });
 
 ipcMain.on('db-update-item', (event, item) => { 
-    const stmt = db.prepare('UPDATE Items SET Name=?, Alias=?, World=?, IsSession=? WHERE ID=?');
-    stmt.run([item.name, item.alias, item.world, 0, item.id]);
+    const stmt = db.prepare('UPDATE Items SET Name=?, Alias=?, Category=? WHERE ID=?');
+    stmt.run([item.name, item.alias, item.category, item.id]);
 });
 
-ipcMain.on('db-update-session', (event, session) => { 
-    const stmt = db.prepare('UPDATE Items SET Name=?, Alias=?, World=?, IsSession=?, SessionOrder=? WHERE ID=?');
-    stmt.run([session.name, session.alias, session.world, 1, session.sessionOrder, session.id]);
+ipcMain.on('db-update-category', (event, category) => {
+    const stmt = db.prepare('UPDATE Categories SET Name=?, World=? WHERE ID=?');
+    stmt.run([category.name, category.world, note.id]);
 });
 
 ipcMain.on('db-update-world', (event, world) => { 
