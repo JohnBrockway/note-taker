@@ -13,9 +13,11 @@ contextBridge.exposeInMainWorld(
         getWorldsResponse: (callback) => ipcRenderer.on('db-get-worlds-response', callback),
         addNote: (note) => ipcRenderer.send('db-add-note', note),
         addItem: (item) => ipcRenderer.send('db-add-item', item),
+        addCategory: (category) => ipcRenderer.send('db-add-category', category),
         addWorld: (world) => ipcRenderer.send('db-add-world', world),
         updateNote: (note) => ipcRenderer.send('db-update-note', note),
         updateItem: (item) => ipcRenderer.send('db-update-item', item),
+        updateCategory: (category) => ipcRenderer.send('db-update-category', category),
         updateWorld: (world) => ipcRenderer.send('db-update-world', world),
     }
 );
