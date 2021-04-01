@@ -1,4 +1,5 @@
 window.electron.getItemsForCategoryResponse((event, data) => setUpItemsList(JSON.parse(data)));
+window.electron.getItemByIDResponse((event, data) => setUpItemDetails(JSON.parse(data)));
 window.electron.getCategoriesForWorldResponse((event, data) => setUpCategories(JSON.parse(data)));
 window.electron.getNotesForItemResponse((event, data) => populateItem(JSON.parse(data)));
 
@@ -35,8 +36,17 @@ function setUpItemsList(items) {
     }
 }
 
-function loadItem(itemName, itemID) {
-    document.getElementById("itemTitle").innerText = itemName;
+function setUpItemDetails(items) {
+    if (items.length < 1) {
+        console.error("No item by that ID");
+        return;
+    }
+
+    document.getElementById("itemTitle").innerText = items[0].Name;
+}
+
+function loadItem(itemID) {
+    window.electron.getItemByID(itemID);
     window.electron.getNotesForItem(itemID);
 }
 

@@ -55,6 +55,13 @@ ipcMain.on('db-get-items-for-category', (event, categoryId) => {
     });
 });
 
+ipcMain.on('db-get-item-by-id', (event, itemId) => {
+    const stmt = db.prepare('SELECT * FROM Items WHERE ID=?');
+    stmt.all([itemId], function(err, rows) {
+        event.sender.send('db-get-item-by-id-response', JSON.stringify(rows));
+    });
+});
+
 ipcMain.on('db-get-categories-for-world', (event, worldId) => {
     const stmt = db.prepare('SELECT * FROM Categories WHERE World=?');
     stmt.all([worldId], function(err, rows) {

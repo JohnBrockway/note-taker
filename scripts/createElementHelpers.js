@@ -25,17 +25,13 @@ function createNoteElement(note) {
 }
 
 /*
- * <li onclick="loadItem("{item.Name}", {item.ID})">
+ * <li>
  *   {item.Name}
  * <li>
  */
 function createItemElement(item) {
-    const onclickResultTemplate = "loadItem(\"{0}\", {1})";
-    let onclickText = onclickResultTemplate.replace("{0}", item.Name);
-    onclickText = onclickText.replace("{1}", item.ID);
-
     const itemElement = document.createElement("li");
-    itemElement.setAttribute("onclick", onclickText);
+    itemElement.addEventListener("click", () => loadItem(item.ID));
     itemElement.innerText = item.Name;
     return itemElement;
 }
