@@ -70,40 +70,40 @@ ipcMain.on('db-get-worlds', (event) => {
 
 ipcMain.on('db-add-note', (event, note) => { 
     const stmt = db.prepare('INSERT INTO Notes (Text, RelatedItems) VALUES (?,?,?)');
-    stmt.run([note.text, note.relatedItems]);
+    stmt.run([note.Text, note.RelatedItems]);
 });
 
 ipcMain.on('db-add-item', (event, item) => { 
     const stmt = db.prepare('INSERT INTO Items (Name, Alias, Category) VALUES (?,?,?)');
-    stmt.run([item.name, item.alias, item.category]);
+    stmt.run([item.Name, item.Alias, item.Category]);
 });
 
 ipcMain.on('db-add-category', (event, category) => { 
     const stmt = db.prepare('INSERT INTO Categories (Name, World) VALUES (?,?)');
-    stmt.run([category.name, category.world]);
+    stmt.run([category.Name, category.World]);
 });
 
 ipcMain.on('db-add-world', (event, world) => { 
     const stmt = db.prepare('INSERT INTO Worlds (Name) VALUES (?)');
-    stmt.run([world.name]);
+    stmt.run([world.Name]);
 });
 
 ipcMain.on('db-update-note', (event, note) => {
     const stmt = db.prepare('UPDATE Notes SET Text=?, RelatedItems=? WHERE ID=?');
-    stmt.run([note.text, note.relatedItems, note.id]);
+    stmt.run([note.Text, note.RelatedItems, note.Id]);
 });
 
 ipcMain.on('db-update-item', (event, item) => { 
     const stmt = db.prepare('UPDATE Items SET Name=?, Alias=?, Category=? WHERE ID=?');
-    stmt.run([item.name, item.alias, item.category, item.id]);
+    stmt.run([item.Name, item.Alias, item.Category, item.ID]);
 });
 
 ipcMain.on('db-update-category', (event, category) => {
     const stmt = db.prepare('UPDATE Categories SET Name=?, World=? WHERE ID=?');
-    stmt.run([category.name, category.world, note.id]);
+    stmt.run([category.Name, category.World, note.ID]);
 });
 
 ipcMain.on('db-update-world', (event, world) => { 
     const stmt = db.prepare('UPDATE Worlds SET Name=? WHERE ID=?');
-    stmt.run([world.name, world.id]);
+    stmt.run([world.Name, world.ID]);
 });

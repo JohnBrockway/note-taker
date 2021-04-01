@@ -2,10 +2,27 @@ html, body {
     font-family: "Open Sans", "Lato", sans-serif;
     margin: 0;
     height: 100%;
+    z-index: 0;
 }
 
 #flexbox {
     display: flex;
     align-items: stretch;
     height: 100%;
+}
+
+#cover {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    display: none;
+}
+
+#cover.show {
+    display: block;
 }

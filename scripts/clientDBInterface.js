@@ -30,8 +30,6 @@ function setUpItemsList(items) {
     for (let i = 0 ; i < items.length ; i++) {
         itemsListElement.appendChild(createItemElement(items[i]));
     }
-
-    loadItem(items[0].Name, items[0].ID);
 }
 
 function loadItem(itemName, itemID) {
