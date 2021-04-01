@@ -2,6 +2,9 @@ window.electron.getItemsForCategoryResponse((event, data) => setUpItemsList(JSON
 window.electron.getCategoriesForWorldResponse((event, data) => setUpCategories(JSON.parse(data)));
 window.electron.getNotesForItemResponse((event, data) => populateItem(JSON.parse(data)));
 
+document.getElementById("newCategory").addEventListener("click", (event) => openAddNewCategoryDialog());
+document.getElementById("submitNewCategory").addEventListener("click", (event) => submitNewCategory());
+document.getElementById("cancelNewCategory").addEventListener("click", (event) => cancelNewCategory());
 window.electron.getCategoriesForWorld(1);
 
 function setUpCategories(categories) {

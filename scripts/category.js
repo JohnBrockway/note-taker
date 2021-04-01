@@ -20,28 +20,29 @@ function unhighlightCategory(node) {
     findAncestorWithClassName(node, "categoryRow").classList.remove("highlight");
 }
 
-function addNewItem(event) {
-    event.stopPropagation();
-    const node = event.target;
+function openAddNewCategoryDialog() {
+    document.getElementById("newCategoryInput").classList.add("visible");
+    document.getElementById("newCategoryInput").getElementsByTagName("input")[0].focus();
     document.getElementById("cover").classList.add("show");
-    const inputFormElement = findAncestorWithClassName(node, "categoryListElement").getElementsByClassName("newItemInput")[0];
-    inputFormElement.classList.add("visible");
 }
 
-function submitNewItem(node, categoryID) {
-    const inputNode = findAncestorWithClassName(node, "newItemInput").getElementsByTagName("input")[0];
-    const newItem = {
+function submitNewCategory() {
+    const inputNode = document.getElementById("newCategoryInput").getElementsByTagName("input")[0];
+    if (inputNode.value == "") {
+        return;
+    }
+    const newCategory = {
         Name: inputNode.value,
-        Alias: -1,
-        Category: categoryID,
-    };
-    window.electron.addItem(newItem);
+        World: 1,
+    }
+    window.electron.addCategory(newCategory);
     inputNode.value = "";
     document.getElementById("cover").classList.remove("show");
+    document.getElementById("newCategoryInput").classList.remove("visible");
 }
 
-function closeNewItem(node) {
-    findAncestorWithClassName(node, "newItemInput").getElementsByTagName("input")[0].value = "";
-    findAncestorWithClassName(node, "newItemInput").classList.remove("visible");
+function cancelNewCategory() {
+    document.getElementById("newCategoryInput").getElementsByTagName("input")[0].value = "";
     document.getElementById("cover").classList.remove("show");
+    document.getElementById("newCategoryInput").classList.remove("visible");
 }

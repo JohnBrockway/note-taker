@@ -67,7 +67,7 @@ function createCategoryElement(category) {
     const newItemElement = document.createElement("p");
     newItemElement.classList.add("newItem");
     newItemElement.innerText = "+";
-    newItemElement.addEventListener("click", (event) => addNewItem(event));
+    newItemElement.addEventListener("click", (event) => openAddNewItemDialog(event));
 
     const categoryIconElement = document.createElement("p");
     categoryIconElement.classList.add("categoryIcon");

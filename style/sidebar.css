@@ -4,6 +4,7 @@
     transition: width 0.4s, min-width 0.4s;
     overflow-y: auto;
     color: #E0E1DD;
+    padding: 10px 0;
 }
 
 #sidebar.open {
@@ -16,9 +17,43 @@
     min-width: 0px;
 }
 
+#sidebar #newCategory {
+    padding: 4px 10px;
+    margin: 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#sidebar #newCategory:hover {
+    background-color: #415A77;
+}
+
+#sidebar #newCategoryInput {
+    position: absolute;
+    left: 153px;
+    visibility: hidden;
+    display: flex;
+    background-color: #1B263B;
+    border: 1px solid black;
+    padding: 6px;
+    border-radius: 6px;
+    z-index: 10;
+    top: 5px;
+    left: 9px;
+}
+
+#sidebar #newCategoryInput.visible {
+    visibility: visible;
+}
+
+#sidebar #newCategoryInput button {
+    cursor: pointer;
+}
+
 #sidebar #categoryList {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 #sidebar #categoryList .categoryRow {
@@ -84,7 +119,6 @@
     list-style-type: none;
     padding: 0;
     overflow-y: hidden;
-    transition: height 0.4s;
 }
 
 #sidebar .itemList.closed {
@@ -98,7 +132,6 @@
 #sidebar .itemList li {
     cursor: pointer;
     padding: 2px 20px;
-    transition: background-color 0.1s;
     font-size: 14px;
 }
 

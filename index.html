@@ -11,6 +11,12 @@
 <body>
     <div id="flexbox">
         <div id="sidebar" class="open">
+            <p id="newCategory">+ New Category</p>
+            <div id=newCategoryInput>
+                <input type="text">
+                <button id="submitNewCategory">✓</button>
+                <button id="cancelNewCategory">×</button>
+            </div>
             <ul id="categoryList"></ul>
         </div>
         <div id="handle" onclick="operateSidebar()">&lsaquo;</div>
@@ -25,6 +31,6 @@
     <script src="scripts/sidebar.js"></script>
     <script src="scripts/navigationHelpers.js"></script>
     <script src="scripts/category.js"></script>
-    <script src="scripts/clientDBInterface.js"></script>
+    <script src="scripts/setup.js"></script>
 </body>
 </html>
