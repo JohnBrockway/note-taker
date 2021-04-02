@@ -28,3 +28,8 @@ function closeNewItem(node) {
     findAncestorWithClassName(node, "newItemInput").classList.remove("visible");
     document.getElementById("cover").classList.remove("show");
 }
+
+function loadItem(itemID) {
+    window.electron.getItemByID(itemID);
+    window.electron.getNotesForItem(itemID);
+}

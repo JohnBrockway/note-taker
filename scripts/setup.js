@@ -1,12 +1,15 @@
-window.electron.getItemsForCategoryResponse((event, data) => setUpItemsList(JSON.parse(data)));
-window.electron.getItemByIDResponse((event, data) => setUpItemDetails(JSON.parse(data)));
-window.electron.getCategoriesForWorldResponse((event, data) => setUpCategories(JSON.parse(data)));
-window.electron.getNotesForItemResponse((event, data) => populateItem(JSON.parse(data)));
+function setUpDatabaseCallbacks() {
+    window.electron.getItemsForCategoryResponse((event, data) => setUpItemsList(JSON.parse(data)));
+    window.electron.getItemByIDResponse((event, data) => setUpItemDetails(JSON.parse(data)));
+    window.electron.getCategoriesForWorldResponse((event, data) => setUpCategories(JSON.parse(data)));
+    window.electron.getNotesForItemResponse((event, data) => populateItem(JSON.parse(data)));
+}
 
-document.getElementById("newCategory").addEventListener("click", (event) => openAddNewCategoryDialog());
-document.getElementById("submitNewCategory").addEventListener("click", (event) => submitNewCategory());
-document.getElementById("cancelNewCategory").addEventListener("click", (event) => cancelNewCategory());
-window.electron.getCategoriesForWorld(1);
+function setUpEventListeners() {
+    document.getElementById("newCategory").addEventListener("click", (event) => openAddNewCategoryDialog());
+    document.getElementById("submitNewCategory").addEventListener("click", (event) => submitNewCategory());
+    document.getElementById("cancelNewCategory").addEventListener("click", (event) => cancelNewCategory());
+}
 
 function setUpCategories(categories) {
     categories.sort((categoryA, categoryB) => stringSort(categoryA.Name, categoryB.Name));
@@ -43,11 +46,6 @@ function setUpItemDetails(items) {
     }
 
     document.getElementById("itemTitle").innerText = items[0].Name;
-}
-
-function loadItem(itemID) {
-    window.electron.getItemByID(itemID);
-    window.electron.getNotesForItem(itemID);
 }
 
 function populateItem(notes) {
