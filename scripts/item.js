@@ -35,5 +35,5 @@ function loadItem(itemID) {
 }
 
 function insertCreatedItem(item) {
-    
+    window.electron.getCategoriesForWorld(1);
 }

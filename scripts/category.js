@@ -46,3 +46,7 @@ function cancelNewCategory() {
     document.getElementById("cover").classList.remove("show");
     document.getElementById("newCategoryInput").classList.remove("visible");
 }
+
+function insertCreatedCategory(category) {
+    window.electron.getCategoriesForWorld(1);
+}
