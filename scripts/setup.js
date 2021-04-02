@@ -3,6 +3,8 @@ function setUpDatabaseCallbacks() {
     window.electron.getItemByIDResponse((event, data) => setUpItemDetails(JSON.parse(data)));
     window.electron.getCategoriesForWorldResponse((event, data) => setUpCategories(JSON.parse(data)));
     window.electron.getNotesForItemResponse((event, data) => populateItem(JSON.parse(data)));
+
+    window.electron.addItemResponse((event, data) => insertCreatedItem(JSON.parse(data)));
 }
 
 function setUpEventListeners() {

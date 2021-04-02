@@ -77,22 +77,50 @@ ipcMain.on('db-get-worlds', (event) => {
 
 ipcMain.on('db-add-note', (event, note) => { 
     const stmt = db.prepare('INSERT INTO Notes (Text, RelatedItems) VALUES (?,?,?)');
-    stmt.run([note.Text, note.RelatedItems]);
+    stmt.run([note.Text, note.RelatedItems], function(err) {
+        if (!err) {
+            note.ID = this.lastID;
+            event.sender.send('db-add-note-response', JSON.stringify(note));
+        } else {
+            event.sender.send('db-add-note-response', JSON.stringify(null));
+        }
+    });
 });
 
 ipcMain.on('db-add-item', (event, item) => { 
     const stmt = db.prepare('INSERT INTO Items (Name, Alias, Category) VALUES (?,?,?)');
-    stmt.run([item.Name, item.Alias, item.Category]);
+    stmt.run([item.Name, item.Alias, item.Category], function(err) {
+        if (!err) {
+            item.ID = this.lastID;
+            event.sender.send('db-add-item-response', JSON.stringify(item));
+        } else {
+            event.sender.send('db-add-item-response', JSON.stringify(null));
+        }
+    });
 });
 
 ipcMain.on('db-add-category', (event, category) => { 
     const stmt = db.prepare('INSERT INTO Categories (Name, World) VALUES (?,?)');
-    stmt.run([category.Name, category.World]);
+    stmt.run([category.Name, category.World], function(err) {
+        if (!err) {
+            category.ID = this.lastID;
+            event.sender.send('db-add-category-response', JSON.stringify(category));
+        } else {
+            event.sender.send('db-add-category-response', JSON.stringify(null));
+        }
+    });
 });
 
 ipcMain.on('db-add-world', (event, world) => { 
     const stmt = db.prepare('INSERT INTO Worlds (Name) VALUES (?)');
-    stmt.run([world.Name]);
+    stmt.run([world.Name], function(err) {
+        if (!err) {
+            world.ID = this.lastID;
+            event.sender.send('db-add-world-response', JSON.stringify(world));
+        } else {
+            event.sender.send('db-add-world-response', JSON.stringify(null));
+        }
+    });
 });
 
 ipcMain.on('db-update-note', (event, note) => {
