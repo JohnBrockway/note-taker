@@ -25,9 +25,7 @@ function createNoteElement(note) {
 }
 
 /*
- * <li>
- *   {item.Name}
- * <li>
+ * <li>{item.Name}<li>
  */
 function createItemElement(item) {
     const itemElement = document.createElement("li");

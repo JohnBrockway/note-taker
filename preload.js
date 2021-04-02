@@ -23,16 +23,3 @@ contextBridge.exposeInMainWorld(
         updateWorld: (world) => ipcRenderer.send('db-update-world', world),
     }
 );
-
-window.addEventListener('DOMContentLoaded', () => {
-    for (const type of ['chrome', 'node', 'electron']) {
-        replaceText(`${type}-version`, process.versions[type]);
-    }
-});
-
-function replaceText (selector, text) {
-    const element = document.getElementById(selector);
-    if (element) {
-        element.innerText = text;
-    }
-}
