@@ -2,17 +2,24 @@
  * <li>
  *   <div class="noteRow">
  *     <p class="noteBullet">▸</p>
- *     <p>{note.Text}</p>
+ *     <textarea wrap="hard">{note.Text}</textarea>
  *   </div>
  * <li>
  */
 function createNoteElement(note) {       
+    return createNoteElementWithText(note.Text);
+}
+
+function createNoteElementWithText(text) {
     const bulletElement = document.createElement("p");
     bulletElement.innerText = "▸";
     bulletElement.classList.add("noteBullet");
     
-    const textElement = document.createElement("p"); 
-    textElement.innerText = note.Text;
+    const textElement = document.createElement("textarea");
+    textElement.addEventListener("keydown", (event) => setNoteHeight(event.target));
+    textElement.addEventListener("keyup", (event) => setNoteHeight(event.target));
+    textElement.setAttribute("wrap", "hard");
+    textElement.innerText = text;
     
     const divElement = document.createElement("div");
     divElement.classList.add("noteRow"); 

@@ -57,6 +57,8 @@ function populateItem(notes) {
     for (let i = 0 ; i < notes.length ; i++) {
         notesListElement.appendChild(createNoteElement(notes[i]));
     }
+    appendEmptyNote();
+    setAllNoteHeights();
 }
 
 function stringSort(stringA, stringB) {

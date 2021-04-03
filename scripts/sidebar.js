@@ -11,6 +11,7 @@ function openSidebar() {
     sidebar.classList.add("open");
     sidebar.classList.remove("closed");
     document.getElementById("handle").innerText = "‹";
+    setAllNoteHeights();
 }
 
 function closeSidebar() {
@@ -18,4 +19,5 @@ function closeSidebar() {
     sidebar.classList.add("closed");
     sidebar.classList.remove("open");
     document.getElementById("handle").innerText = "›";
+    setAllNoteHeights();
 }

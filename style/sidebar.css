@@ -1,7 +1,6 @@
 #sidebar {
     background-color: #1B263B;
     flex-basis: auto;
-    transition: width 0.4s, min-width 0.4s;
     overflow-y: auto;
     color: #E0E1DD;
     padding: 10px 0;

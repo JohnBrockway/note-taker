@@ -37,3 +37,20 @@
 #main #notesList li .noteRow .noteBullet {
     margin-right: 8px;
 }
+
+#main #notesList li .noteRow textarea {
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+    font-family: "Open Sans", "Lato", sans-serif;
+    background: none;
+    color: #E0E1DD;
+    border: none;
+    padding: 4px;
+    border-radius: 6px;
+}
+
+#main #notesList li .noteRow textarea:focus {
+    outline: none;
+    background-color: #1B263B;
+}
