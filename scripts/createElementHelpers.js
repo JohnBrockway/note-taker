@@ -1,8 +1,10 @@
 /*
  * <li>
  *   <div class="noteRow">
- *     <p class="noteBullet">▸</p>
- *     <textarea wrap="hard">{note.Text}</textarea>
+ *     <div class="input">
+ *       <p class="noteBullet">▸</p>
+ *       <textarea wrap="hard">{note.Text}</textarea>
+ *     </div>
  *   </div>
  * <li>
  */
@@ -21,10 +23,14 @@ function createNoteElementWithText(text) {
     textElement.setAttribute("wrap", "hard");
     textElement.innerText = text;
     
+    const inputRowDiv = document.createElement("div");
+    inputRowDiv.classList.add("input");
+    inputRowDiv.appendChild(bulletElement);
+    inputRowDiv.appendChild(textElement);
+
     const divElement = document.createElement("div");
     divElement.classList.add("noteRow"); 
-    divElement.appendChild(bulletElement);
-    divElement.appendChild(textElement);
+    divElement.appendChild(inputRowDiv);
     
     const listItemElement = document.createElement("li");
     listItemElement.appendChild(divElement);

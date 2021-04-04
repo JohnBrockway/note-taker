@@ -22,23 +22,20 @@
     padding: 0;
 }
 
-#main #notesList li .noteRow {
+#main #notesList li .noteRow .input {
     display: flex;
     align-items: flex-start;
 }
 
-#main #notesList li .noteRow p {
+#main #notesList li .noteRow .input .noteBullet {
+    margin-right: 8px;
     display: inline;
     padding: 4px 0px;
     margin: 0;
     font-size: 14px;
 }
 
-#main #notesList li .noteRow .noteBullet {
-    margin-right: 8px;
-}
-
-#main #notesList li .noteRow textarea {
+#main #notesList li .noteRow .input textarea {
     width: 100%;
     resize: none;
     overflow: hidden;
@@ -46,11 +43,11 @@
     background: none;
     color: #E0E1DD;
     border: none;
-    padding: 4px;
+    padding: 5px;
     border-radius: 6px;
 }
 
-#main #notesList li .noteRow textarea:focus {
+#main #notesList li .noteRow .input textarea:focus {
     outline: none;
     background-color: #1B263B;
 }

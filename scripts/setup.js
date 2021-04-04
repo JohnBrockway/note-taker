@@ -12,6 +12,7 @@ function setUpEventListeners() {
     document.getElementById("newCategory").addEventListener("click", (event) => openAddNewCategoryDialog());
     document.getElementById("submitNewCategory").addEventListener("click", (event) => submitNewCategory());
     document.getElementById("cancelNewCategory").addEventListener("click", (event) => cancelNewCategory());
+    window.addEventListener("resize", () => setAllNoteHeights());
 }
 
 function setUpCategories(categories) {

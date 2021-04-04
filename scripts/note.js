@@ -12,5 +12,5 @@ function setAllNoteHeights() {
 }
 
 function appendEmptyNote() {
-    const notesListElement = document.getElementById("notesList").appendChild(createNoteElementWithText(""));
+    document.getElementById("notesList").appendChild(createNoteElementWithText(""));
 }
