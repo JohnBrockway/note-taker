@@ -1,9 +1,9 @@
 /*
- * <li>
- *   <div class="noteRow">
- *     <div class="input">
+ * <li class="noteListElement">
+ *   <div>
+ *     <div class="noteTextDiv">
  *       <p class="noteBullet">▸</p>
- *       <textarea wrap="hard">{note.Text}</textarea>
+ *       <textarea class="noteText" wrap="hard">{note.Text}</textarea>
  *     </div>
  *   </div>
  * <li>
@@ -21,19 +21,20 @@ function createNoteElementWithText(text) {
     textElement.addEventListener("keydown", (event) => setNoteHeight(event.target));
     textElement.addEventListener("keyup", (event) => setNoteHeight(event.target));
     textElement.setAttribute("wrap", "hard");
+    textElement.classList.add("noteText");
     textElement.innerText = text;
     
     const inputRowDiv = document.createElement("div");
-    inputRowDiv.classList.add("input");
+    inputRowDiv.classList.add("noteTextDiv");
     inputRowDiv.appendChild(bulletElement);
     inputRowDiv.appendChild(textElement);
 
     const divElement = document.createElement("div");
-    divElement.classList.add("noteRow"); 
     divElement.appendChild(inputRowDiv);
     
     const listItemElement = document.createElement("li");
     listItemElement.appendChild(divElement);
+    listItemElement.classList.add("noteListElement");
     return listItemElement;
 }
 
@@ -42,6 +43,7 @@ function createNoteElementWithText(text) {
  */
 function createItemElement(item) {
     const itemElement = document.createElement("li");
+    itemElement.classList.add("item");
     itemElement.addEventListener("click", () => loadItem(item.ID));
     itemElement.innerText = item.Name;
     return itemElement;
@@ -53,8 +55,8 @@ function createItemElement(item) {
  *     <p class="categoryName">{category.Name}</p>
  *     <div class="newItemInput visible">
  *       <input type="text">
- *       <button>✓</button>
- *       <button>×</button>
+ *       <button id="submitNewItem">✓</button>
+ *       <button id="cancelNewItem">×</button>
  *     </div>
  *     <div class="iconDiv">
  *       <p class="newItem"">+</p>
@@ -97,10 +99,12 @@ function createCategoryElement(category) {
     newItemName.setAttribute("type", "text");
 
     const newItemSubmit = document.createElement("button");
+    newItemSubmit.classList.add("submitNewItem"); 
     newItemSubmit.innerText = "✓";
     newItemSubmit.addEventListener("click", (event) => submitNewItem(event.target, category.ID));
 
     const newItemCancel = document.createElement("button");
+    newItemCancel.classList.add("cancelNewItem"); 
     newItemCancel.innerText = "×";
     newItemCancel.addEventListener("click", (event) => closeNewItem(event.target));
 

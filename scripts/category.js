@@ -21,13 +21,13 @@ function unhighlightCategory(node) {
 }
 
 function openAddNewCategoryDialog() {
-    document.getElementById("newCategoryInput").classList.add("visible");
-    document.getElementById("newCategoryInput").getElementsByTagName("input")[0].focus();
+    document.getElementById("newCategoryInputContainer").classList.add("visible");
+    document.getElementById("newCategoryInputContainer").getElementsByTagName("input")[0].focus();
     document.getElementById("cover").classList.add("show");
 }
 
 function submitNewCategory() {
-    const inputNode = document.getElementById("newCategoryInput").getElementsByTagName("input")[0];
+    const inputNode = document.getElementById("newCategoryInputContainer").getElementsByTagName("input")[0];
     if (inputNode.value == "") {
         return;
     }
@@ -38,13 +38,13 @@ function submitNewCategory() {
     window.electron.addCategory(newCategory);
     inputNode.value = "";
     document.getElementById("cover").classList.remove("show");
-    document.getElementById("newCategoryInput").classList.remove("visible");
+    document.getElementById("newCategoryInputContainer").classList.remove("visible");
 }
 
 function cancelNewCategory() {
-    document.getElementById("newCategoryInput").getElementsByTagName("input")[0].value = "";
+    document.getElementById("newCategoryInputContainer").getElementsByTagName("input")[0].value = "";
     document.getElementById("cover").classList.remove("show");
-    document.getElementById("newCategoryInput").classList.remove("visible");
+    document.getElementById("newCategoryInputContainer").classList.remove("visible");
 }
 
 function insertCreatedCategory(category) {

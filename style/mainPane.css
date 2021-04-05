@@ -7,27 +7,27 @@
     padding: 16px;
 }
 
-#main #itemTitle {
+#itemTitle {
     margin: 0;
     font-size: 28px;
 }
 
-#main #notesList {
+#notesList {
     list-style-type: none;
     padding: 0;
 }
 
-#main #notesList li {
+.noteListElement {
     list-style-type: none;
     padding: 0;
 }
 
-#main #notesList li .noteRow .input {
+.noteTextDiv {
     display: flex;
     align-items: flex-start;
 }
 
-#main #notesList li .noteRow .input .noteBullet {
+.noteBullet {
     margin-right: 8px;
     display: inline;
     padding: 4px 0px;
@@ -35,7 +35,7 @@
     font-size: 14px;
 }
 
-#main #notesList li .noteRow .input textarea {
+.noteText {
     width: 100%;
     resize: none;
     overflow: hidden;
@@ -47,7 +47,7 @@
     border-radius: 6px;
 }
 
-#main #notesList li .noteRow .input textarea:focus {
+.noteText:focus {
     outline: none;
     background-color: #1B263B;
 }

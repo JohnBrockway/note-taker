@@ -16,18 +16,18 @@
     min-width: 0px;
 }
 
-#sidebar #newCategory {
+#newCategoryButton {
     padding: 4px 10px;
     margin: 0;
     font-size: 16px;
     cursor: pointer;
 }
 
-#sidebar #newCategory:hover {
+#newCategoryButton:hover {
     background-color: #415A77;
 }
 
-#sidebar #newCategoryInput {
+#newCategoryInputContainer {
     position: absolute;
     left: 153px;
     visibility: hidden;
@@ -41,38 +41,37 @@
     left: 9px;
 }
 
-#sidebar #newCategoryInput.visible {
+#newCategoryInputContainer.visible {
     visibility: visible;
 }
 
-#sidebar #newCategoryInput button {
+#submitNewCategory {
     cursor: pointer;
 }
 
-#sidebar #categoryList {
+#cancelNewCategory {
+    cursor: pointer;
+}
+
+#categoryList {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-#sidebar #categoryList .categoryRow {
+.categoryRow {
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-#sidebar #categoryList .categoryRow.highlight {
+.categoryRow.highlight {
     background-color: #415A77;
 }
 
-#sidebar #categoryList .categoryRow p {
-    display: inline;
-    padding: 4px 10px;
-    margin: 0;
-}
-
 #sidebar #categoryList .categoryName {
+    display: inline;
     padding: 4px 10px;
     margin: 0;
     font-size: 16px;
@@ -83,17 +82,23 @@
     padding-right: 6px;
 }
 
-#sidebar #categoryList .iconDiv p {
+.newItem {
     display: inline;
     padding: 4px 6px;
     margin: 0;
 }
 
-#sidebar #categoryList .iconDiv .newItem:hover {
+.newItem:hover {
     background-color: #415A77;
 }
 
-#sidebar #categoryList .newItemInput {
+.categoryIcon {
+    display: inline;
+    padding: 4px 6px;
+    margin: 0;
+}
+
+.newItemInput {
     position: absolute;
     left: 153px;
     visibility: hidden;
@@ -105,36 +110,41 @@
     z-index: 10;
 }
 
-#sidebar #categoryList .newItemInput.visible {
+.newItemInput.visible {
     visibility: visible;
 }
 
-#sidebar #categoryList .newItemInput button {
+.submitNewItem {
     cursor: pointer;
     font-family: "Open Sans", "Lato", sans-serif;
 }
 
-#sidebar .itemList {
+.cancelNewItem {
+    cursor: pointer;
+    font-family: "Open Sans", "Lato", sans-serif;
+}
+
+.itemList {
     list-style-type: none;
     padding: 0;
     overflow-y: hidden;
 }
 
-#sidebar .itemList.closed {
+.itemList.closed {
     height: 0; 
 }
 
-#sidebar .itemList.open {
+.itemList.open {
     height: auto; 
 }
 
-#sidebar .itemList li {
+.item {
     cursor: pointer;
     padding: 2px 20px;
     font-size: 14px;
 }
 
-#sidebar .itemList li:hover {
+.item:hover {
     background-color: #415A77;
 }
 
