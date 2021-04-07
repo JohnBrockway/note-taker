@@ -27,32 +27,6 @@
     background-color: #415A77;
 }
 
-#newCategoryInputContainer {
-    position: absolute;
-    left: 153px;
-    visibility: hidden;
-    display: flex;
-    background-color: #1B263B;
-    border: 1px solid black;
-    padding: 6px;
-    border-radius: 6px;
-    z-index: 10;
-    top: 5px;
-    left: 9px;
-}
-
-#newCategoryInputContainer.visible {
-    visibility: visible;
-}
-
-#submitNewCategory {
-    cursor: pointer;
-}
-
-#cancelNewCategory {
-    cursor: pointer;
-}
-
 #categoryList {
     list-style-type: none;
     padding: 0;
@@ -70,7 +44,7 @@
     background-color: #415A77;
 }
 
-#sidebar #categoryList .categoryName {
+.categoryName {
     display: inline;
     padding: 4px 10px;
     margin: 0;
@@ -78,7 +52,7 @@
     flex-grow: 1;
 }
 
-#sidebar #categoryList .iconDiv {
+.iconDiv {
     padding-right: 6px;
 }
 
@@ -96,32 +70,6 @@
     display: inline;
     padding: 4px 6px;
     margin: 0;
-}
-
-.newItemInput {
-    position: absolute;
-    left: 153px;
-    visibility: hidden;
-    display: flex;
-    background-color: #1B263B;
-    border: 1px solid black;
-    padding: 6px;
-    border-radius: 6px;
-    z-index: 10;
-}
-
-.newItemInput.visible {
-    visibility: visible;
-}
-
-.submitNewItem {
-    cursor: pointer;
-    font-family: "Open Sans", "Lato", sans-serif;
-}
-
-.cancelNewItem {
-    cursor: pointer;
-    font-family: "Open Sans", "Lato", sans-serif;
 }
 
 .itemList {

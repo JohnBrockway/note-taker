@@ -11,7 +11,9 @@ function setUpDatabaseCallbacks() {
 function setUpEventListeners() {
     document.getElementById("newCategoryButton").addEventListener("click", (event) => openAddNewCategoryDialog());
     document.getElementById("submitNewCategory").addEventListener("click", (event) => submitNewCategory());
-    document.getElementById("cancelNewCategory").addEventListener("click", (event) => cancelNewCategory());
+    document.getElementById("cancelNewCategory").addEventListener("click", (event) => closeAddNewCategoryDialog());
+    document.getElementById("submitNewItem").addEventListener("click", (event) => submitNewItem());
+    document.getElementById("cancelNewItem").addEventListener("click", (event) => closeAddNewItemDialog());
     window.addEventListener("resize", () => setAllNoteHeights());
 }
 

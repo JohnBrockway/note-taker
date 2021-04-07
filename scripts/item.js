@@ -1,32 +1,31 @@
-function openAddNewItemDialog(event) {
+function openAddNewItemDialog(event, categoryId) {
     event.stopPropagation();
-    const node = event.target;
+
+    document.getElementById("fullPageNewItemCover").classList.add("show");
+    document.getElementById("newItemInputContainer").getElementsByTagName("input")[0].focus();
     document.getElementById("cover").classList.add("show");
-    const inputFormElement = findAncestorWithClassName(node, "categoryListElement").getElementsByClassName("newItemInput")[0];
-    inputFormElement.classList.add("visible");
-    inputFormElement.getElementsByTagName("input")[0].focus();
+    window.sessionStorage.setItem("currentCategory", categoryId);
 }
 
-function submitNewItem(node, categoryID) {
-    const inputNode = findAncestorWithClassName(node, "newItemInput").getElementsByTagName("input")[0];
+function submitNewItem() {
+    const inputNode = document.getElementById("newItemInputContainer").getElementsByTagName("input")[0];
     if (inputNode.value == "") {
         return;
     }
     const newItem = {
         Name: inputNode.value,
         Alias: -1,
-        Category: categoryID,
+        Category: window.sessionStorage.getItem("currentCategory"),
     };
     window.electron.addItem(newItem);
-    inputNode.value = "";
-    findAncestorWithClassName(node, "newItemInput").classList.remove("visible");
-    document.getElementById("cover").classList.remove("show");
+    closeAddNewItemDialog();
 }
 
-function closeNewItem(node) {
-    findAncestorWithClassName(node, "newItemInput").getElementsByTagName("input")[0].value = "";
-    findAncestorWithClassName(node, "newItemInput").classList.remove("visible");
+function closeAddNewItemDialog() {
+    document.getElementById("newItemInputContainer").getElementsByTagName("input")[0].value = "";
     document.getElementById("cover").classList.remove("show");
+    document.getElementById("fullPageNewItemCover").classList.remove("show");
+    window.sessionStorage.removeItem("currentCategory");
 }
 
 function loadItem(itemID) {

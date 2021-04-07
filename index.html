@@ -12,11 +12,6 @@
     <div id="flexbox">
         <div id="sidebar" class="open">
             <p id="newCategoryButton">+ New Category</p>
-            <div id="newCategoryInputContainer">
-                <input type="text">
-                <button id="submitNewCategory">✓</button>
-                <button id="cancelNewCategory">×</button>
-            </div>
             <ul id="categoryList"></ul>
         </div>
         <div id="handle" onclick="operateSidebar()">&lsaquo;</div>
@@ -26,6 +21,20 @@
         </div>
     </div>
     <div id="cover"></div>
+    <div id="fullPageNewCategoryCover">
+        <div id="newCategoryInputContainer">
+            <input type="text">
+            <button id="submitNewCategory">✓</button>
+            <button id="cancelNewCategory">×</button>
+        </div>
+    </div>
+    <div id="fullPageNewItemCover">
+        <div id="newItemInputContainer">
+            <input type="text">
+            <button id="submitNewItem">✓</button>
+            <button id="cancelNewItem">×</button>
+        </div>
+    </div>
 
     <script src="scripts/note.js"></script>
     <script src="scripts/item.js"></script>

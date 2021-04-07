@@ -21,7 +21,7 @@ function unhighlightCategory(node) {
 }
 
 function openAddNewCategoryDialog() {
-    document.getElementById("newCategoryInputContainer").classList.add("visible");
+    document.getElementById("fullPageNewCategoryCover").classList.add("show");
     document.getElementById("newCategoryInputContainer").getElementsByTagName("input")[0].focus();
     document.getElementById("cover").classList.add("show");
 }
@@ -36,15 +36,13 @@ function submitNewCategory() {
         World: 1,
     }
     window.electron.addCategory(newCategory);
-    inputNode.value = "";
-    document.getElementById("cover").classList.remove("show");
-    document.getElementById("newCategoryInputContainer").classList.remove("visible");
+    closeAddNewCategoryDialog();
 }
 
-function cancelNewCategory() {
+function closeAddNewCategoryDialog() {
     document.getElementById("newCategoryInputContainer").getElementsByTagName("input")[0].value = "";
     document.getElementById("cover").classList.remove("show");
-    document.getElementById("newCategoryInputContainer").classList.remove("visible");
+    document.getElementById("fullPageNewCategoryCover").classList.remove("show");
 }
 
 function insertCreatedCategory(category) {
