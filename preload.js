@@ -9,6 +9,8 @@ contextBridge.exposeInMainWorld(
         getItemsForCategoryResponse: (callback) => ipcRenderer.on('db-get-items-for-category-response', callback),
         getItemByID: (itemId) => ipcRenderer.send('db-get-item-by-id', itemId),
         getItemByIDResponse: (callback) => ipcRenderer.on('db-get-item-by-id-response', callback),
+        getAllItems: (itemId) => ipcRenderer.send('db-get-all-items'),
+        getAllItemsResponse: (callback) => ipcRenderer.on('db-get-all-items-response', callback),
         getCategoriesForWorld: (worldId) => ipcRenderer.send('db-get-categories-for-world', worldId),
         getCategoriesForWorldResponse: (callback) => ipcRenderer.on('db-get-categories-for-world-response', callback),
         getWorlds: () => ipcRenderer.send('db-get-worlds'),

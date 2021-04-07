@@ -1,4 +1,5 @@
 function setUpDatabaseCallbacks() {
+    window.electron.getAllItemsResponse((event, data) => {});
     window.electron.getItemsForCategoryResponse((event, data) => setUpItemsList(JSON.parse(data)));
     window.electron.getItemByIDResponse((event, data) => setUpItemDetails(JSON.parse(data)));
     window.electron.getCategoriesForWorldResponse((event, data) => setUpCategories(JSON.parse(data)));
