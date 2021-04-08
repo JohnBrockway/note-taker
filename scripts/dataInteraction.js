@@ -41,6 +41,7 @@ function refreshSingleItem(itemId) {
 }
 
 function handleGetItemResponse(item) {
+    window.localStorage.setItem("lastUsedItem", item.ID);
     setItemTitle(item);
     refreshNotes(item.ID);
 }
