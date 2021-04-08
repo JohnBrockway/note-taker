@@ -48,22 +48,18 @@ ipcMain.on('db-get-notes-for-item', (event, itemId) => {
     });
 });
 
-ipcMain.on('db-get-items-for-category', (event, categoryId) => {
-    const stmt = db.prepare('SELECT * FROM Items WHERE Category=?');
-    stmt.all([categoryId], function(err, rows) {
-        event.sender.send('db-get-items-for-category-response', JSON.stringify(rows));
-    });
-});
-
-ipcMain.on('db-get-all-items', (event) => {
-    db.all('SELECT * FROM Items', function(err, rows) {
-        event.sender.send('db-get-all-items-response', JSON.stringify(rows));
+ipcMain.on('db-get-items-for-categories', (event, categoryIds) => {
+    // A list of comma separated question marks, the same length as categoryIds
+    const listOfPlaceholders = categoryIds.map(() => '?').join(',');
+    const stmt = db.prepare('SELECT * FROM Items WHERE Category IN (' + listOfPlaceholders + ')');
+    stmt.all(categoryIds, function(err, rows) {
+        event.sender.send('db-get-items-for-categories-response', JSON.stringify(rows));
     });
 });
 
 ipcMain.on('db-get-item-by-id', (event, itemId) => {
-    const stmt = db.prepare('SELECT * FROM Items WHERE ID=?');
-    stmt.all([itemId], function(err, rows) {
+    const stmt = db.prepare('SELECT * FROM Items WHERE ID=? LIMIT 1');
+    stmt.get([itemId], function(err, rows) {
         event.sender.send('db-get-item-by-id-response', JSON.stringify(rows));
     });
 });
@@ -141,7 +137,7 @@ ipcMain.on('db-update-item', (event, item) => {
 
 ipcMain.on('db-update-category', (event, category) => {
     const stmt = db.prepare('UPDATE Categories SET Name=?, World=? WHERE ID=?');
-    stmt.run([category.Name, category.World, note.ID]);
+    stmt.run([category.Name, category.World, category.ID]);
 });
 
 ipcMain.on('db-update-world', (event, world) => { 

@@ -23,7 +23,7 @@ function unhighlightCategory(node) {
 function openAddNewCategoryDialog() {
     document.getElementById("fullPageNewCategoryCover").classList.add("show");
     document.getElementById("newCategoryInputContainer").getElementsByTagName("input")[0].focus();
-    document.getElementById("cover").classList.add("show");
+    cover();
 }
 
 function submitNewCategory() {
@@ -41,10 +41,10 @@ function submitNewCategory() {
 
 function closeAddNewCategoryDialog() {
     document.getElementById("newCategoryInputContainer").getElementsByTagName("input")[0].value = "";
-    document.getElementById("cover").classList.remove("show");
+    uncover();
     document.getElementById("fullPageNewCategoryCover").classList.remove("show");
 }
 
 function insertCreatedCategory(category) {
-    window.electron.getCategoriesForWorld(1);
+    refreshCategories();
 }

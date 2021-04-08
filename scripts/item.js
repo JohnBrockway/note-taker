@@ -3,7 +3,7 @@ function openAddNewItemDialog(event, categoryId) {
 
     document.getElementById("fullPageNewItemCover").classList.add("show");
     document.getElementById("newItemInputContainer").getElementsByTagName("input")[0].focus();
-    document.getElementById("cover").classList.add("show");
+    cover();
     window.sessionStorage.setItem("currentCategory", categoryId);
 }
 
@@ -23,7 +23,7 @@ function submitNewItem() {
 
 function closeAddNewItemDialog() {
     document.getElementById("newItemInputContainer").getElementsByTagName("input")[0].value = "";
-    document.getElementById("cover").classList.remove("show");
+    uncover();
     document.getElementById("fullPageNewItemCover").classList.remove("show");
     window.sessionStorage.removeItem("currentCategory");
 }
@@ -34,5 +34,5 @@ function loadItem(itemID) {
 }
 
 function insertCreatedItem(item) {
-    window.electron.getCategoriesForWorld(1);
+    refreshItems(item.Category);
 }

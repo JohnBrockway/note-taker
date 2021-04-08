@@ -43,12 +43,15 @@
     <script src="scripts/navigationHelpers.js"></script>
     <script src="scripts/category.js"></script>
     <script src="scripts/setup.js"></script>
+    <script src="scripts/dataInteraction.js"></script>
+    <script src="scripts/domInteraction.js"></script>
+    <script src="scripts/miscHelpers.js"></script>
     <script>
         setUpDatabaseCallbacks();
         setUpEventListeners();
     </script>
     <script>
-        window.electron.getCategoriesForWorld(1);
+        refreshSidebar();
     </script>
 </body>
 </html>
