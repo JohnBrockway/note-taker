@@ -1,8 +1,8 @@
 function populateSidebarWithCategories(categories) {
     const categoryListElement = document.getElementById("categoryList");
     categoryListElement.innerHTML = null;
-    for (let i = 0 ; i < categories.length ; i++) {
-        categoryListElement.appendChild(createCategoryElement(categories[i]));
+    for (const category of categories) {
+        categoryListElement.appendChild(createCategoryElement(category));
     }
 }
 
@@ -15,8 +15,8 @@ function populateSidebarCategoryWithItems(items, categoryId) {
         itemsListElement = maybeCorrectItemsList[0];
         itemsListElement.innerHTML = null;
     }
-    for (let i = 0 ; i < items.length ; i++) {
-        itemsListElement.appendChild(createItemElement(items[i]));
+    for (const item of items) {
+        itemsListElement.appendChild(createItemElement(item));
     }
 }
 
@@ -28,15 +28,15 @@ function populateNotesList(notes) {
     const notesListElement = document.getElementById("notesList");
     const allItemsMap = getItemsFromLocalStorageFlat();
     notesListElement.innerHTML = null;
-    for (let i = 0 ; i < notes.length ; i++) {
+    for (const note of notes) {
         let relatedItems = [];
-        let relatedItemIds = notes[i].RelatedItems.split('/');
+        let relatedItemIds = note.RelatedItems.split('/');
         relatedItemIds.map((itemId) => {
             if (itemId && allItemsMap.has(parseInt(itemId))) {
                 relatedItems.push(allItemsMap.get(parseInt(itemId)));
             }
         });
-        notesListElement.appendChild(createNoteElement(notes[i], relatedItems));
+        notesListElement.appendChild(createNoteElement(note, relatedItems));
     }
     appendEmptyNote();
     setAllNoteHeights();
