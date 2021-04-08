@@ -28,11 +28,6 @@ function closeAddNewItemDialog() {
     window.sessionStorage.removeItem("currentCategory");
 }
 
-function loadItem(itemID) {
-    window.electron.getItemByID(itemID);
-    window.electron.getNotesForItem(itemID);
-}
-
 function insertCreatedItem(item) {
-    refreshItems(item.Category);
+    refreshItems([item.Category]);
 }
