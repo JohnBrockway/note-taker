@@ -1,18 +1,14 @@
 /*
  * <li class="noteListElement">
- *   <div>
- *     <div class="noteTextDiv">
- *       <p class="noteBullet">▸</p>
- *       <textarea class="noteText" wrap="hard">{note.Text}</textarea>
- *     </div>
+ *   <p class="noteBullet">▸</p>
+ *   <div class="noteMainDiv">
+ *     <textarea class="noteText" wrap="hard">{note.Text}</textarea>
+ *     <div class="suggestedItems"></div>
+ *     <div class="relatedItems"></div>
  *   </div>
  * <li>
  */
-function createNoteElement(note) {       
-    return createNoteElementWithText(note.Text);
-}
-
-function createNoteElementWithText(text) {
+function createNoteElement(note, relatedItems) {
     const bulletElement = document.createElement("p");
     bulletElement.innerText = "▸";
     bulletElement.classList.add("noteBullet");
@@ -22,18 +18,31 @@ function createNoteElementWithText(text) {
     textElement.addEventListener("keyup", (event) => setNoteHeight(event.target));
     textElement.setAttribute("wrap", "hard");
     textElement.classList.add("noteText");
-    textElement.innerText = text;
+    textElement.innerText = note == null ? "" : note.Text;
     
-    const inputRowDiv = document.createElement("div");
-    inputRowDiv.classList.add("noteTextDiv");
-    inputRowDiv.appendChild(bulletElement);
-    inputRowDiv.appendChild(textElement);
+    const suggestedItemsDiv = document.createElement("div");
+    suggestedItemsDiv.classList.add("suggestedItems");
+    
+    const relatedItemsDiv = document.createElement("div");
+    relatedItemsDiv.classList.add("relatedItems");
 
-    const divElement = document.createElement("div");
-    divElement.appendChild(inputRowDiv);
+    for (const item of relatedItems) {
+        const relatedItem = document.createElement("p");
+        relatedItem.classList.add("relatedItem");
+        relatedItem.innerText = item.Name;
+        relatedItem.addEventListener("click", () => refreshSingleItem(item.ID));
+        relatedItemsDiv.appendChild(relatedItem);
+    }
+
+    const noteMainDiv = document.createElement("div");
+    noteMainDiv.classList.add("noteMainDiv");
+    noteMainDiv.appendChild(textElement);
+    noteMainDiv.appendChild(suggestedItemsDiv);
+    noteMainDiv.appendChild(relatedItemsDiv);
     
     const listItemElement = document.createElement("li");
-    listItemElement.appendChild(divElement);
+    listItemElement.appendChild(bulletElement);
+    listItemElement.appendChild(noteMainDiv);
     listItemElement.classList.add("noteListElement");
     return listItemElement;
 }

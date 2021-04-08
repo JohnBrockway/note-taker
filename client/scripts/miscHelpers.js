@@ -15,3 +15,12 @@ function stringifyMap(map) {
 function destringifyMap(stringifiedMap) {
     return new Map(JSON.parse(stringifiedMap));
 }
+
+function getItemsFromLocalStorageFlat() {
+    const locallySavedItemsIterator = destringifyMap(window.sessionStorage.getItem("allItems")).values();
+    const allItemsFlatMap = new Map();
+    for (const listOfItemsInCategory of locallySavedItemsIterator) {
+        listOfItemsInCategory.map((item) => allItemsFlatMap.set(item.ID, item));
+    }
+    return allItemsFlatMap;
+}

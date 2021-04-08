@@ -18,13 +18,15 @@
 }
 
 .noteListElement {
+    display: flex;
+    align-items: flex-start;
     list-style-type: none;
     padding: 0;
 }
 
-.noteTextDiv {
-    display: flex;
-    align-items: flex-start;
+.noteMainDiv {
+    width: 100%;
+    padding: 5px;
 }
 
 .noteBullet {
@@ -43,11 +45,24 @@
     background: none;
     color: #E0E1DD;
     border: none;
-    padding: 5px;
     border-radius: 6px;
 }
 
 .noteText:focus {
     outline: none;
     background-color: #1B263B;
+}
+
+.relatedItem {
+    cursor: pointer;
+    display: inline;
+    padding: 4px 10px;
+    border-radius: 25px;
+    background-color: #1B263B;
+    font-size: 12px;
+    margin: 0 2px;
+}
+
+.relatedItem:hover {
+    background-color: #415A77;
 }

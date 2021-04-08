@@ -1,6 +1,6 @@
 function setNoteHeight(node) {
     node.style.height = "";
-    const newHeight = node.scrollHeight + 3;
+    const newHeight = node.scrollHeight;
     node.style.height = newHeight + 'px';
 }
 
@@ -12,5 +12,5 @@ function setAllNoteHeights() {
 }
 
 function appendEmptyNote() {
-    document.getElementById("notesList").appendChild(createNoteElementWithText(""));
+    document.getElementById("notesList").appendChild(createNoteElement(null, []));
 }

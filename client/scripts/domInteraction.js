@@ -26,9 +26,17 @@ function setItemTitle(item) {
 
 function populateNotesList(notes) {
     const notesListElement = document.getElementById("notesList");
+    const allItemsMap = getItemsFromLocalStorageFlat();
     notesListElement.innerHTML = null;
     for (let i = 0 ; i < notes.length ; i++) {
-        notesListElement.appendChild(createNoteElement(notes[i]));
+        let relatedItems = [];
+        let relatedItemIds = notes[i].RelatedItems.split('/');
+        relatedItemIds.map((itemId) => {
+            if (itemId && allItemsMap.has(parseInt(itemId))) {
+                relatedItems.push(allItemsMap.get(parseInt(itemId)));
+            }
+        });
+        notesListElement.appendChild(createNoteElement(notes[i], relatedItems));
     }
     appendEmptyNote();
     setAllNoteHeights();
