@@ -15,7 +15,7 @@ function createWindow() {
     });
 
     //win.removeMenu();
-    win.loadFile('index.html');
+    win.loadFile('client/index.html');
 }
 
 function maybeSetUpDatabase() {
