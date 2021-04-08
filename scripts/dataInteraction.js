@@ -20,8 +20,8 @@ function refreshItems(categoryIds) {
 }
 
 function handleGetItemsResponse(items) {
-    let itemsForStorage = new Map(JSON.parse(window.sessionStorage.getItem("allItems")));
-    
+    let itemsForStorage = destringifyMap(window.sessionStorage.getItem("allItems"));
+
     // Set is a collection that enforces uniqueness, so any duplicates will be collapsed
     const activeCategoryIds = new Set(items.map((item) => item.Category));
     for (let categoryId of activeCategoryIds) {
@@ -31,21 +31,21 @@ function handleGetItemsResponse(items) {
         itemsForStorage.set(categoryId, relevantItems);
         populateSidebarCategoryWithItems(relevantItems, categoryId);
     }
-    window.sessionStorage.setItem("allItems", JSON.stringify(Array.from(itemsForStorage.entries())));
+    window.sessionStorage.setItem("allItems", stringifyMap(itemsForStorage));
     uncover();
 }
 
-function populateSingleItem(itemId) {
+function refreshSingleItem(itemId) {
     cover();
     window.electron.getItemByID(itemId);
 }
 
 function handleGetItemResponse(item) {
     setItemTitle(item);
-    populateNotes(item.ID);
+    refreshNotes(item.ID);
 }
 
-function populateNotes(itemId) {
+function refreshNotes(itemId) {
     cover();
     window.electron.getNotesForItem(itemId);
 }

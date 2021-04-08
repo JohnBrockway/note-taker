@@ -7,3 +7,11 @@ function stringSort(stringA, stringB) {
         return 0;
     }
 }
+
+function stringifyMap(map) {
+    return JSON.stringify(Array.from(map.entries()));
+}
+
+function destringifyMap(stringifiedMap) {
+    return new Map(JSON.parse(stringifiedMap));
+}

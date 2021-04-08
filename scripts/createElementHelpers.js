@@ -44,7 +44,7 @@ function createNoteElementWithText(text) {
 function createItemElement(item) {
     const itemElement = document.createElement("li");
     itemElement.classList.add("item");
-    itemElement.addEventListener("click", () => populateSingleItem(item.ID));
+    itemElement.addEventListener("click", () => refreshSingleItem(item.ID));
     itemElement.innerText = item.Name;
     return itemElement;
 }
