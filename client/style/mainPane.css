@@ -32,7 +32,7 @@
 .noteBullet {
     margin-right: 8px;
     display: inline;
-    padding: 4px 0px;
+    padding: 6px 0px;
     margin: 0;
     font-size: 14px;
 }
@@ -53,6 +53,15 @@
     background-color: #1B263B;
 }
 
+.relatedItems {
+    display: none;
+    flex-wrap: wrap;
+}
+
+.relatedItems.show {
+    display: flex;
+}
+
 .relatedItem {
     cursor: pointer;
     display: inline;
@@ -60,7 +69,7 @@
     border-radius: 25px;
     background-color: #1B263B;
     font-size: 12px;
-    margin: 0 2px;
+    margin: 2px 2px;
 }
 
 .relatedItem:hover {

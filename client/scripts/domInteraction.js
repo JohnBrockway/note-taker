@@ -20,8 +20,8 @@ function populateSidebarCategoryWithItems(items, categoryId) {
     }
 }
 
-function setItemTitle(item) {
-    document.getElementById("itemTitle").innerText = item.Name;
+function setItemTitle(itemName) {
+    document.getElementById("itemTitle").innerText = itemName;
 }
 
 function populateNotesList(notes) {

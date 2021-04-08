@@ -16,6 +16,7 @@ function createNoteElement(note, relatedItems) {
     const textElement = document.createElement("textarea");
     textElement.addEventListener("keydown", (event) => setNoteHeight(event.target));
     textElement.addEventListener("keyup", (event) => setNoteHeight(event.target));
+    textElement.addEventListener("focus", (event => openRelatedItems(event.target)));
     textElement.setAttribute("wrap", "hard");
     textElement.classList.add("noteText");
     textElement.innerText = note == null ? "" : note.Text;

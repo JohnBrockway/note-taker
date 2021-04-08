@@ -24,7 +24,7 @@ function handleGetItemsResponse(items) {
 
     // Set is a collection that enforces uniqueness, so any duplicates will be collapsed
     const activeCategoryIds = new Set(items.map((item) => item.Category));
-    for (let categoryId of activeCategoryIds) {
+    for (const categoryId of activeCategoryIds) {
         const relevantItems = items.filter((item) => item.Category == categoryId);
         relevantItems.sort((itemA, itemB) => stringSort(itemA.Name, itemB.Name));
 
@@ -42,7 +42,7 @@ function refreshSingleItem(itemId) {
 
 function handleGetItemResponse(item) {
     window.localStorage.setItem("lastUsedItem", item.ID);
-    setItemTitle(item);
+    setItemTitle(item.Name);
     refreshNotes(item.ID);
 }
 
