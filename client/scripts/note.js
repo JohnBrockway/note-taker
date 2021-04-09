@@ -60,14 +60,15 @@ function onTypingStop(node) {
 }
 
 function saveNote(node) {
+    clearTimeout(typingTimeout);
     findAncestorWithClassName(node, "noteListElement").getElementsByClassName("noteTextUneditable")[0].innerText = node.value;
     const id = parseInt(findAncestorWithClassName(node, "noteListElement").getAttribute("noteID"));
     if (id == -1) {
         let note = {
             Text: node.value,
-            RelatedItems: "",
+            RelatedItems: "/" + window.localStorage.getItem("lastUsedItem") + "/",
         };
-        window.electron.addNote(note);
+        addNote(note);
     } else {
         let note = destringifyMap(window.sessionStorage.getItem("activeNotes")).get(id);
         note.Text = node.value;

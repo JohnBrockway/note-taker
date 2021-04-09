@@ -47,13 +47,7 @@ function createNoteElement(note, relatedItems) {
     const relatedItemsDiv = document.createElement("div");
     relatedItemsDiv.classList.add("relatedItems");
 
-    for (const item of relatedItems) {
-        const relatedItem = document.createElement("p");
-        relatedItem.classList.add("relatedItem");
-        relatedItem.innerText = item.Name;
-        relatedItem.addEventListener("click", () => refreshSingleItem(item.ID));
-        relatedItemsDiv.appendChild(relatedItem);
-    }
+    fillRelatedItemsDiv(relatedItemsDiv, relatedItems);
 
     const noteMainDiv = document.createElement("div");
     noteMainDiv.classList.add("noteMainDiv");
@@ -68,6 +62,17 @@ function createNoteElement(note, relatedItems) {
     listItemElement.classList.add("noteListElement");
     listItemElement.setAttribute("noteID", note == null ? -1 : note.ID);
     return listItemElement;
+}
+
+function fillRelatedItemsDiv(relatedItemsDiv, relatedItems) {
+    relatedItemsDiv.innerHTML = null;
+    for (const item of relatedItems) {
+        const relatedItem = document.createElement("p");
+        relatedItem.classList.add("relatedItem");
+        relatedItem.innerText = item.Name;
+        relatedItem.addEventListener("click", () => refreshSingleItem(item.ID));
+        relatedItemsDiv.appendChild(relatedItem);
+    }
 }
 
 /*

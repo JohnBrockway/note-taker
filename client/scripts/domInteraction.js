@@ -29,13 +29,7 @@ function populateNotesList(notes) {
     const allItemsMap = getItemsFromLocalStorageFlat();
     notesListElement.innerHTML = null;
     for (const note of notes) {
-        let relatedItems = [];
-        let relatedItemIds = note.RelatedItems.split('/');
-        relatedItemIds.map((itemId) => {
-            if (itemId && allItemsMap.has(parseInt(itemId))) {
-                relatedItems.push(allItemsMap.get(parseInt(itemId)));
-            }
-        });
+        const relatedItems = getItemsFromMapByIds(allItemsMap, note.RelatedItems.split('/'));
         notesListElement.appendChild(createNoteElement(note, relatedItems));
     }
     appendEmptyNote();

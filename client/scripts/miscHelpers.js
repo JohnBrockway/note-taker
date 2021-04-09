@@ -24,3 +24,13 @@ function getItemsFromLocalStorageFlat() {
     }
     return allItemsFlatMap;
 }
+
+function getItemsFromMapByIds(itemMap, listOfIds) {
+    let relatedItems = [];
+    listOfIds.map((itemId) => {
+        if (itemId && itemMap.has(parseInt(itemId))) {
+            relatedItems.push(itemMap.get(parseInt(itemId)));
+        }
+    });
+    return relatedItems;
+}

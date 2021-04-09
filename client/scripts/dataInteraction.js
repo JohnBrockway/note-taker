@@ -60,3 +60,23 @@ function handleGetNotesResponse(notes) {
     populateNotesList(notes);
     uncover();
 }
+
+function addNote(note) {
+    cover();
+    window.electron.addNote(note);
+}
+
+function handleAddNoteResponse(note) {
+    const noteListElement = Array.from(document.getElementsByClassName("noteListElement")).filter((node) => node.getAttribute("noteID") == -1)[0];
+    noteListElement.setAttribute("noteId", note.ID);
+
+    const relatedItems = getItemsFromMapByIds(getItemsFromLocalStorageFlat(), note.RelatedItems.split('/'));
+    fillRelatedItemsDiv(noteListElement.getElementsByClassName("relatedItems")[0], relatedItems);
+    
+    let notesForStorage = destringifyMap(window.sessionStorage.getItem("activeNotes"));
+    notesForStorage.set(note.ID, note);
+    window.sessionStorage.setItem("activeNotes", stringifyMap(notesForStorage));
+
+    appendEmptyNote();
+    uncover();
+}
