@@ -39,7 +39,6 @@ function populateNotesList(notes) {
         notesListElement.appendChild(createNoteElement(note, relatedItems));
     }
     appendEmptyNote();
-    setAllNoteHeights();
 }
 
 function cover() {

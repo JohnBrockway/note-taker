@@ -14,5 +14,4 @@ function setUpEventListeners() {
     document.getElementById("cancelNewCategory").addEventListener("click", (event) => closeAddNewCategoryDialog());
     document.getElementById("submitNewItem").addEventListener("click", (event) => submitNewItem());
     document.getElementById("cancelNewItem").addEventListener("click", (event) => closeAddNewItemDialog());
-    window.addEventListener("resize", () => setAllNoteHeights());
 }

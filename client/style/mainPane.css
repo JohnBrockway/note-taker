@@ -42,7 +42,33 @@
     background-color: #1B263B;
 }
 
-.noteText {
+.noteTextUneditable {
+    margin: 0;
+    display: none;
+    padding: 2px;
+    font-size: 13px;
+    width: 100%;
+    font-family: "Open Sans", "Lato", sans-serif;
+    background: none;
+    color: #E0E1DD;
+    border: none;
+    border-radius: 6px;
+    cursor: text;
+    min-height: 17px;
+}
+
+.noteTextUneditable.show {
+    display: block;
+}
+
+.noteTextUneditable:hover {
+    background-color: #1B263B;
+}
+
+.noteTextEditable {
+    display: none;
+    padding: 2px;
+    font-size: 13px;
     width: 100%;
     resize: none;
     overflow: hidden;
@@ -53,8 +79,16 @@
     border-radius: 6px;
 }
 
-.noteText:focus {
+.noteTextEditable.show {
+    display: block;
+}
+
+.noteTextEditable:focus {
     outline: none;
+    background-color: #1B263B;
+}
+
+.noteTextEditable:hover {
     background-color: #1B263B;
 }
 

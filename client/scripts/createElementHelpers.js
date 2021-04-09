@@ -2,7 +2,8 @@
  * <li class="noteListElement">
  *   <p class="noteBullet">▸</p>
  *   <div class="noteMainDiv">
- *     <textarea class="noteText" wrap="hard">{note.Text}</textarea>
+ *     <p class="noteTextUneditable">{note.Text}</textarea>
+ *     <textarea class="noteTextEditable" wrap="hard">{note.Text}</textarea>
  *     <div class="suggestedItems"></div>
  *     <div class="relatedItems"></div>
  *   </div>
@@ -13,14 +14,23 @@ function createNoteElement(note, relatedItems) {
     bulletElement.innerText = "▸";
     bulletElement.addEventListener("click", (event) => operateRelatedItems(event.target));
     bulletElement.classList.add("noteBullet");
-    
-    const textElement = document.createElement("textarea");
-    textElement.addEventListener("keydown", (event) => setNoteHeight(event.target));
-    textElement.addEventListener("keyup", (event) => setNoteHeight(event.target));
-    textElement.addEventListener("focus", (event => openRelatedItems(event.target)));
-    textElement.setAttribute("wrap", "hard");
-    textElement.classList.add("noteText");
+
+    const textElement = document.createElement("p");
+    textElement.classList.add("noteTextUneditable");
+    textElement.classList.add("show");
+    textElement.addEventListener("click", (event => {
+        openNoteForEditing(event.target);
+        openRelatedItems(event.target);
+    }));
     textElement.innerText = note == null ? "" : note.Text;
+    
+    const textAreaElement = document.createElement("textarea");
+    textAreaElement.addEventListener("keydown", (event) => setNoteHeight(event.target));
+    textAreaElement.addEventListener("keyup", (event) => setNoteHeight(event.target));
+    textAreaElement.addEventListener("blur", (event) => closeNoteForEditing(event.target));
+    textAreaElement.setAttribute("wrap", "hard");
+    textAreaElement.classList.add("noteTextEditable");
+    textAreaElement.innerText = note == null ? "" : note.Text;
     
     const suggestedItemsDiv = document.createElement("div");
     suggestedItemsDiv.classList.add("suggestedItems");
@@ -39,6 +49,7 @@ function createNoteElement(note, relatedItems) {
     const noteMainDiv = document.createElement("div");
     noteMainDiv.classList.add("noteMainDiv");
     noteMainDiv.appendChild(textElement);
+    noteMainDiv.appendChild(textAreaElement);
     noteMainDiv.appendChild(suggestedItemsDiv);
     noteMainDiv.appendChild(relatedItemsDiv);
     
