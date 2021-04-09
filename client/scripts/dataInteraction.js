@@ -52,6 +52,11 @@ function refreshNotes(itemId) {
 }
 
 function handleGetNotesResponse(notes) {
+    let notesForStorage = destringifyMap(window.sessionStorage.getItem("activeNotes"));
+    
+    notes.map((note) => notesForStorage.set(note.ID, note));
+    window.sessionStorage.setItem("activeNotes", stringifyMap(notesForStorage));
+
     populateNotesList(notes);
     uncover();
 }

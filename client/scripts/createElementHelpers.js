@@ -25,9 +25,18 @@ function createNoteElement(note, relatedItems) {
     textElement.innerText = note == null ? "" : note.Text;
     
     const textAreaElement = document.createElement("textarea");
-    textAreaElement.addEventListener("keydown", (event) => setNoteHeight(event.target));
-    textAreaElement.addEventListener("keyup", (event) => setNoteHeight(event.target));
-    textAreaElement.addEventListener("blur", (event) => closeNoteForEditing(event.target));
+    textAreaElement.addEventListener("keydown", (event) => {
+        setNoteHeight(event.target);
+        onTypingStop(event.target);
+    });
+    textAreaElement.addEventListener("keyup", (event) => {
+        setNoteHeight(event.target);
+        onTypingStop(event.target);
+    });
+    textAreaElement.addEventListener("blur", (event) => {
+        saveNote(event.target);
+        closeNoteForEditing(event.target);
+    });
     textAreaElement.setAttribute("wrap", "hard");
     textAreaElement.classList.add("noteTextEditable");
     textAreaElement.innerText = note == null ? "" : note.Text;
@@ -57,6 +66,7 @@ function createNoteElement(note, relatedItems) {
     listItemElement.appendChild(bulletElement);
     listItemElement.appendChild(noteMainDiv);
     listItemElement.classList.add("noteListElement");
+    listItemElement.setAttribute("noteID", note == null ? -1 : note.ID);
     return listItemElement;
 }
 

@@ -15,3 +15,13 @@ function setUpEventListeners() {
     document.getElementById("submitNewItem").addEventListener("click", (event) => submitNewItem());
     document.getElementById("cancelNewItem").addEventListener("click", (event) => closeAddNewItemDialog());
 }
+
+function startup() {
+    setUpDatabaseCallbacks();
+    setUpEventListeners();
+    refreshSidebar();
+    const lastUsedItem = window.localStorage.getItem("lastUsedItem");
+    if (lastUsedItem) {
+        refreshSingleItem(lastUsedItem);
+    }
+}

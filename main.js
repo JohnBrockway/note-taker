@@ -78,7 +78,7 @@ ipcMain.on('db-get-worlds', (event) => {
 });
 
 ipcMain.on('db-add-note', (event, note) => { 
-    const stmt = db.prepare('INSERT INTO Notes (Text, RelatedItems) VALUES (?,?,?)');
+    const stmt = db.prepare('INSERT INTO Notes (Text, RelatedItems) VALUES (?,?)');
     stmt.run([note.Text, note.RelatedItems], function(err) {
         if (!err) {
             note.ID = this.lastID;
@@ -127,7 +127,7 @@ ipcMain.on('db-add-world', (event, world) => {
 
 ipcMain.on('db-update-note', (event, note) => {
     const stmt = db.prepare('UPDATE Notes SET Text=?, RelatedItems=? WHERE ID=?');
-    stmt.run([note.Text, note.RelatedItems, note.Id]);
+    stmt.run([note.Text, note.RelatedItems, note.ID]);
 });
 
 ipcMain.on('db-update-item', (event, item) => { 

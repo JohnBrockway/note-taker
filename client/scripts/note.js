@@ -50,3 +50,27 @@ function closeNoteForEditing(node) {
     findAncestorWithClassName(node, "noteListElement").getElementsByClassName("noteTextEditable")[0].classList.remove("show");
     findAncestorWithClassName(node, "noteListElement").getElementsByClassName("noteTextUneditable")[0].classList.add("show");
 }
+
+let typingTimeout;
+
+function onTypingStop(node) {
+    clearTimeout(typingTimeout);
+
+    typingTimeout = setTimeout(() => saveNote(node), 2000);
+}
+
+function saveNote(node) {
+    findAncestorWithClassName(node, "noteListElement").getElementsByClassName("noteTextUneditable")[0].innerText = node.value;
+    const id = parseInt(findAncestorWithClassName(node, "noteListElement").getAttribute("noteID"));
+    if (id == -1) {
+        let note = {
+            Text: node.value,
+            RelatedItems: "",
+        };
+        window.electron.addNote(note);
+    } else {
+        let note = destringifyMap(window.sessionStorage.getItem("activeNotes")).get(id);
+        note.Text = node.value;
+        window.electron.updateNote(note);
+    }
+}
