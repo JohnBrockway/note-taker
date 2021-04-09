@@ -30,11 +30,16 @@
 }
 
 .noteBullet {
-    margin-right: 8px;
+    border-radius: 25px;
     display: inline;
-    padding: 6px 0px;
-    margin: 0;
+    padding: 2px 3px;
+    margin: 4px 0;
     font-size: 14px;
+    cursor: pointer;
+}
+
+.noteBullet:hover {
+    background-color: #1B263B;
 }
 
 .noteText {

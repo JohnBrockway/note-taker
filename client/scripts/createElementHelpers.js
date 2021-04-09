@@ -11,6 +11,7 @@
 function createNoteElement(note, relatedItems) {
     const bulletElement = document.createElement("p");
     bulletElement.innerText = "▸";
+    bulletElement.addEventListener("click", (event) => operateRelatedItems(event.target));
     bulletElement.classList.add("noteBullet");
     
     const textElement = document.createElement("textarea");
