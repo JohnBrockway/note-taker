@@ -64,6 +64,20 @@ function createNoteElement(note, relatedItems) {
     return listItemElement;
 }
 
+function fillSuggestedItemsDiv(suggestedItemsDiv, items, note) {
+    suggestedItemsDiv.innerHTML = null;
+    const alreadyRelatedItems = note.RelatedItems.split('/').map((itemId) => parseInt(itemId));
+    for (const item of items.values()) {
+        if (!alreadyRelatedItems.includes(item.ID) && note.Text.includes(item.Name)) {
+            const suggestedItem = document.createElement("p");
+            suggestedItem.classList.add("suggestedItem");
+            suggestedItem.innerText = item.Name;
+            suggestedItem.addEventListener("click", () => addRelatedItemToNote(item.ID));
+            suggestedItemsDiv.appendChild(suggestedItem);
+        }
+    }
+}
+
 function fillRelatedItemsDiv(relatedItemsDiv, relatedItems) {
     relatedItemsDiv.innerHTML = null;
     for (const item of relatedItems) {

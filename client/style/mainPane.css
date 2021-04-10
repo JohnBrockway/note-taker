@@ -92,6 +92,29 @@
     background-color: #1B263B;
 }
 
+.suggestedItems {
+    display: none;
+    flex-wrap: wrap;
+}
+
+.suggestedItems.show {
+    display: flex;
+}
+
+.suggestedItem {
+    cursor: pointer;
+    display: inline;
+    padding: 4px 10px;
+    border-radius: 25px;
+    background-color: #1B263B;
+    font-size: 12px;
+    margin: 2px 2px;
+}
+
+.suggestedItem:hover {
+    background-color: #415A77;
+}
+
 .relatedItems {
     display: none;
     flex-wrap: wrap;

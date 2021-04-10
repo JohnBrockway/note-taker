@@ -27,11 +27,14 @@ function operateRelatedItems(node) {
 }
 
 function openRelatedItems(node) {
+    recalculateSuggestedItems(node);
+    findAncestorWithClassName(node, "noteListElement").getElementsByClassName("suggestedItems")[0].classList.add("show");
     findAncestorWithClassName(node, "noteListElement").getElementsByClassName("relatedItems")[0].classList.add("show");
     findAncestorWithClassName(node, "noteListElement").getElementsByClassName("noteBullet")[0].innerText = "▾";
 }
 
 function closeRelatedItems(node) {
+    findAncestorWithClassName(node, "noteListElement").getElementsByClassName("relatedItems")[0].classList.remove("show");
     findAncestorWithClassName(node, "noteListElement").getElementsByClassName("relatedItems")[0].classList.remove("show");
     findAncestorWithClassName(node, "noteListElement").getElementsByClassName("noteBullet")[0].innerText = "▸";
 }
@@ -74,4 +77,15 @@ function saveNote(node) {
         note.Text = node.value;
         window.electron.updateNote(note);
     }
+}
+
+function addRelatedItemToNote(itemId) {
+
+}
+
+function recalculateSuggestedItems(node) {
+    const suggestedItemsDiv = findAncestorWithClassName(node, "noteListElement").getElementsByClassName("suggestedItems")[0];
+    const id = parseInt(findAncestorWithClassName(node, "noteListElement").getAttribute("noteID"));
+    let note = destringifyMap(window.sessionStorage.getItem("activeNotes")).get(id);
+    fillSuggestedItemsDiv(suggestedItemsDiv, getItemsFromLocalStorageFlat(), note);
 }

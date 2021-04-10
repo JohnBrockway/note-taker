@@ -28,6 +28,6 @@ function closeAddNewItemDialog() {
     window.sessionStorage.removeItem("currentCategory");
 }
 
-function insertCreatedItem(item) {
+function handleAddItemResponse(item) {
     refreshItems([item.Category]);
 }
