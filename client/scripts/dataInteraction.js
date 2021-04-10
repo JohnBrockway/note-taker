@@ -52,7 +52,7 @@ function refreshNotes(itemId) {
 }
 
 function handleGetNotesResponse(notes) {
-    let notesForStorage = destringifyMap(window.sessionStorage.getItem("activeNotes"));
+    let notesForStorage = new Map();
     
     notes.map((note) => notesForStorage.set(note.ID, note));
     window.sessionStorage.setItem("activeNotes", stringifyMap(notesForStorage));
@@ -78,5 +78,21 @@ function handleAddNoteResponse(note) {
     window.sessionStorage.setItem("activeNotes", stringifyMap(notesForStorage));
 
     appendEmptyNote();
+    uncover();
+}
+
+function refreshNoteRelatedItems(note) {
+    cover();
+    window.electron.updateNote(note);
+}
+
+function handleUpdateNoteResponse(note) {
+    let activeNotes = destringifyMap(window.sessionStorage.getItem("activeNotes"));
+    activeNotes.set(note.ID, note);
+    window.sessionStorage.setItem("activeNotes", stringifyMap(activeNotes));
+    const noteListElement = Array.from(document.getElementsByClassName("noteListElement")).filter((node) => node.getAttribute("noteID") == note.ID)[0];
+    const relatedItems = getItemsFromMapByIds(getItemsFromLocalStorageFlat(), note.RelatedItems.split('/'));
+    recalculateSuggestedItems(noteListElement);
+    fillRelatedItemsDiv(noteListElement.getElementsByClassName("relatedItems")[0], relatedItems);
     uncover();
 }

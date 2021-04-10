@@ -7,6 +7,8 @@ function setUpDatabaseCallbacks() {
     window.electron.addNoteResponse((event, data) => handleAddNoteResponse(JSON.parse(data)));
     window.electron.addItemResponse((event, data) => handleAddItemResponse(JSON.parse(data)));
     window.electron.addCategoryResponse((event, data) => insertCreatedCategory(JSON.parse(data)));
+
+    window.electron.updateNoteResponse((event, data) => handleUpdateNoteResponse(JSON.parse(data)));
 }
 
 function setUpEventListeners() {

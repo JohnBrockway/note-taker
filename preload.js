@@ -22,6 +22,7 @@ contextBridge.exposeInMainWorld(
         addWorld: (world) => ipcRenderer.send('db-add-world', world),
         addWorldResponse: (callback) => ipcRenderer.on('db-add-world-response', callback),
         updateNote: (note) => ipcRenderer.send('db-update-note', note),
+        updateNoteResponse: (callback) => ipcRenderer.on('db-update-note-response', callback),
         updateItem: (item) => ipcRenderer.send('db-update-item', item),
         updateCategory: (category) => ipcRenderer.send('db-update-category', category),
         updateWorld: (world) => ipcRenderer.send('db-update-world', world),

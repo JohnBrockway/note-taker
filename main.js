@@ -127,7 +127,13 @@ ipcMain.on('db-add-world', (event, world) => {
 
 ipcMain.on('db-update-note', (event, note) => {
     const stmt = db.prepare('UPDATE Notes SET Text=?, RelatedItems=? WHERE ID=?');
-    stmt.run([note.Text, note.RelatedItems, note.ID]);
+    stmt.run([note.Text, note.RelatedItems, note.ID], function(err) {
+        if (!err) {
+            event.sender.send('db-update-note-response', JSON.stringify(note));
+        } else {
+            event.sender.send('db-update-note-response', JSON.stringify(null));
+        }
+    });
 });
 
 ipcMain.on('db-update-item', (event, item) => { 

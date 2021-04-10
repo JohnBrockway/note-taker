@@ -66,13 +66,13 @@ function createNoteElement(note, relatedItems) {
 
 function fillSuggestedItemsDiv(suggestedItemsDiv, items, note) {
     suggestedItemsDiv.innerHTML = null;
-    const alreadyRelatedItems = note.RelatedItems.split('/').map((itemId) => parseInt(itemId));
+    const alreadyRelatedItems = note == null ? [] : note.RelatedItems.split('/').map((itemId) => parseInt(itemId));
     for (const item of items.values()) {
         if (!alreadyRelatedItems.includes(item.ID) && note.Text.includes(item.Name)) {
             const suggestedItem = document.createElement("p");
             suggestedItem.classList.add("suggestedItem");
             suggestedItem.innerText = item.Name;
-            suggestedItem.addEventListener("click", () => addRelatedItemToNote(item.ID));
+            suggestedItem.addEventListener("mousedown", (event) => addRelatedItemToNote(event.target, item.ID));
             suggestedItemsDiv.appendChild(suggestedItem);
         }
     }
@@ -84,7 +84,7 @@ function fillRelatedItemsDiv(relatedItemsDiv, relatedItems) {
         const relatedItem = document.createElement("p");
         relatedItem.classList.add("relatedItem");
         relatedItem.innerText = item.Name;
-        relatedItem.addEventListener("click", () => refreshSingleItem(item.ID));
+        relatedItem.addEventListener("mousedown", () => refreshSingleItem(item.ID));
         relatedItemsDiv.appendChild(relatedItem);
     }
 }
