@@ -18,7 +18,7 @@ function createNoteElement(note, relatedItems) {
     const textElement = document.createElement("p");
     textElement.classList.add("noteTextUneditable");
     textElement.classList.add("show");
-    textElement.addEventListener("click", (event => {
+    textElement.addEventListener("mousedown", (event => {
         openNoteForEditing(event.target);
         openRelatedItems(event.target);
     }));
@@ -68,7 +68,7 @@ function fillSuggestedItemsDiv(suggestedItemsDiv, items, note) {
     suggestedItemsDiv.innerHTML = null;
     const alreadyRelatedItems = note == null ? [] : note.RelatedItems.split('/').map((itemId) => parseInt(itemId));
     for (const item of items.values()) {
-        if (!alreadyRelatedItems.includes(item.ID) && note.Text.includes(item.Name)) {
+        if (!alreadyRelatedItems.includes(item.ID) && note.Text.toLowerCase().includes(item.Name.toLowerCase())) {
             const suggestedItem = document.createElement("p");
             suggestedItem.classList.add("suggestedItem");
             suggestedItem.innerText = item.Name;
