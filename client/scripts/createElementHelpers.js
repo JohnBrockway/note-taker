@@ -19,6 +19,7 @@ function createNoteElement(note, relatedItems) {
     textElement.classList.add("noteTextUneditable");
     textElement.classList.add("show");
     textElement.addEventListener("mousedown", (event => {
+        closeAllNotesForEditing();
         openNoteForEditing(event.target);
         openRelatedItems(event.target);
     }));
@@ -35,7 +36,6 @@ function createNoteElement(note, relatedItems) {
     });
     textAreaElement.addEventListener("blur", (event) => {
         saveNote(event.target);
-        closeNoteForEditing(event.target);
     });
     textAreaElement.setAttribute("wrap", "hard");
     textAreaElement.classList.add("noteTextEditable");

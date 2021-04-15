@@ -54,6 +54,11 @@ function closeNoteForEditing(node) {
     findAncestorWithClassName(node, "noteListElement").getElementsByClassName("noteTextUneditable")[0].classList.add("show");
 }
 
+function closeAllNotesForEditing() {
+    Array.from(document.getElementsByClassName("noteTextEditable")).map(element => element.classList.remove("show"));
+    Array.from(document.getElementsByClassName("noteTextUneditable")).map(element => element.classList.add("show"));
+}
+
 let typingTimeout;
 
 function onTypingStop(node) {
